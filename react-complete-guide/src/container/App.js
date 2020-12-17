@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import Person from '../Persons/Person/Person';
 import Radium from 'radium'
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
 
 class App extends Component {
   state = {
