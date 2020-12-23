@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from '../Persons/Person/Person';
 import Radium from 'radium'
+import Persons from '../components/Persons/Persons';
 
 class App extends Component {
   state = {
@@ -13,7 +13,7 @@ class App extends Component {
     toggle: true
   }
 
-  deletePersonHandler(index) {
+  deletePersonHandler=(index) =>{
     // const person = [...this.state.persons]
     const person = this.state.persons.slice()
     person.splice(index, 1);
@@ -28,7 +28,7 @@ class App extends Component {
       (person) => id === person.id)
     persons[index].name = event.target.value;
     this.setState({
-      persons: persons
+      persons: persons  
     })
   }
 
@@ -57,15 +57,11 @@ class App extends Component {
     if (this.state.toggle) {
       person = (
         <div>
-          {this.state.persons.map((person, index) =>
-            <ErrorBoundary key={person.id}>
-              <Person
-                name={person.name}
-                age={person.age}
-                click={this.deletePersonHandler.bind(this, index)}
-                changed={(event) => this.nameChangeHandler(event, person.id)}
-              />
-            </ErrorBoundary>)}
+          <Persons
+            persons={this.state.persons}
+            changed={this.nameChangeHandler}
+            clicked={this.deletePersonHandler}
+          /> 
         </div>
       )
       style.backgroundColor = "red"
@@ -75,6 +71,7 @@ class App extends Component {
         color: "black"
       }
     }
+
 
     // const classes = ['red', 'bold'].join(' ')
     let classes = ''
@@ -94,30 +91,3 @@ class App extends Component {
 }
 
 export default Radium(App);
-
-
-
-
-// const [personState, setPersonState] = useState({
-//   person: [
-//     { name: "Sarthak", age: 21 },
-//     { name: "Saurabh", age: 26 }
-//   ]
-// })
-
-// const [otherState, setOtherState] = useState({gender: "Male"})
-
-// console.log(personState,otherState);
-// const handleSubmit = () => {
-//   setPersonState({
-//     person: [
-//       {
-//         name: "Mahi", age: "20",
-//       }, {
-//         name: "Shruti", age: "21"
-//       }],
-//   })
-//   setOtherState({
-//     gender:"Female"
-//   })
-// }
